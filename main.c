@@ -108,7 +108,7 @@ void retirar(Cuenta *c, double monto){
     char retorno1[5];
     sprintf(retorno1,"%d:%d",tm.tm_hour, tm.tm_min);
     agregarMovimiento(Movimiento_crear(movimientoActual+1,"retiro",retorno,retorno1,monto,c));
-    printf("El deposito de %lf ha sido efectuado con exito en la cuenta: %ld, saldo actual: %lf\n",monto,c->numCuenta,c->saldo);
+    printf("El retiro de %lf ha sido efectuado con exito en la cuenta: %ld, saldo actual: %lf\n",monto,c->numCuenta,c->saldo);
 }
 
 int main(){
