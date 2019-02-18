@@ -1,8 +1,9 @@
 /***********************
  Materia: Estructuras de datos
  Profesora: Miriam Pescador Rojas
- Descripcion: Implementacion de las funciones
+ Descripcion: Definicion de variabes globales usadas en diferentes estructuras
  **************/
+
 #ifndef _UTIL_H
 
 #define TAM 30

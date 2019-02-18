@@ -1,3 +1,9 @@
+/***********************
+ Materia: Estructuras de datos
+ Profesora: Miriam Pescador Rojas
+ Descripcion: Implementacion de las funciones correspondentes a la estructura cuenta
+ **************/
+
 #include "cuenta.h"
 
 void Cuenta_mostrar(Cuenta* cuenta){

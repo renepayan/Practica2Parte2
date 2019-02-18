@@ -1,8 +1,9 @@
 /***********************
  Materia: Estructuras de datos
  Profesora: Miriam Pescador Rojas
- Descripcion: Implementacion de las funciones
+ Descripcion: Definicion de la estructura movimiento y la funcion crear movimiento
  **************/
+
 #ifndef _MOVIMIENTO_H
 #define _MOVIMIENTO_H
 #include "cuenta.h"
@@ -14,6 +15,7 @@ typedef struct{
     double monto;
     Cuenta cta;
 } Movimiento;
+
 Movimiento Movimiento_crear(long numero, char tipo[30], char fecha[10], char hora[5], double monto, Cuenta* cuenta);
 void Movimiento_mostrar(Movimiento *m);
 #endif // _MOVIMIENTO_H

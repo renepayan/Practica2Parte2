@@ -1,3 +1,9 @@
+/***********************
+ Materia: Estructuras de datos
+ Profesora: Miriam Pescador Rojas
+ Descripcion: Implementacion de las funciones correspondientes a la estructura de movimiento
+ **************/
+
 #include "movimiento.h"
 
 Movimiento Movimiento_crear(long numero, char tipo[30], char fecha[10], char hora[5], double monto, Cuenta* cuenta){

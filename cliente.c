@@ -1,8 +1,9 @@
 /***********************
  Materia: Estructuras de datos
  Profesora: Miriam Pescador Rojas
- Descripcion: Implementacion de las funciones
+ Descripcion: Implementacion de las funciones correspondientes a la estructura cliente
  **************/
+
 #include "cliente.h"
 
 Cliente Cliente_crear(char nombre[TAM], char app[TAM], char apm[TAM], char direccion[TAMMAX], long numero){

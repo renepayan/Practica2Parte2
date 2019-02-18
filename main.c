@@ -3,12 +3,14 @@
  Profesora: Miriam Pescador Rojas
  Descripcion: Implementacion de las funciones
  **************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "cliente.h"
 #include "cuenta.h"
 #include "Movimiento.h"
 #include <time.h>
+
 Cuenta *cuentas;
 Movimiento *movimientos;
 Cliente *clientes;
