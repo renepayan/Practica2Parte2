@@ -21,12 +21,6 @@ int movimientoActual = 0;
 void verCliente(Cliente c){
     Cliente_mostrar(&c);
 }
-int cambiarNip(Cuenta *c, char nip[4]){
-    for(int i = 0;i<4;i++){
-        c->nip[i] = (int)(nip[i] - '0');
-    }
-    printf("Nip cambiado Exitosamente\n");
-}
 void listarCuentas(){
     printf("Mostrando lista de cuentas: \n");
     for(int i = 0;i<cuentaActual;i++){
@@ -90,28 +84,6 @@ int buscarCliente(long numero){
     }
     return (i == cuentaActual?-1:i);
 }
-void depositar(Cuenta *c, double monto){
-    c->saldo+=monto;
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    char* retorno[30];
-    sprintf(retorno,"%d/%d/%d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
-    char retorno1[5];
-    sprintf(retorno1,"%d:%d",tm.tm_hour, tm.tm_min);
-    agregarMovimiento(Movimiento_crear(movimientoActual+1,"deposito",retorno,retorno1,monto,c));
-    printf("El deposito de %lf ha sido efectuado con exito en la cuenta: %ld, saldo actual: %lf\n",monto,c->numCuenta,c->saldo);
-}
-void retirar(Cuenta *c, double monto){
-    c->saldo-=monto;
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-    char* retorno[30];
-    sprintf(retorno,"%d/%d/%d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
-    char retorno1[5];
-    sprintf(retorno1,"%d:%d",tm.tm_hour, tm.tm_min);
-    agregarMovimiento(Movimiento_crear(movimientoActual+1,"retiro",retorno,retorno1,monto,c));
-    printf("El retiro de %lf ha sido efectuado con exito en la cuenta: %ld, saldo actual: %lf\n",monto,c->numCuenta,c->saldo);
-}
 
 int main(){
     agregarCliente(Cliente_crear("Mario Alberto","Rosas","Solis","Tamaulipas 36, Col.Roma D.F.",578690));
@@ -132,6 +104,10 @@ int main(){
     int opcion;
     char nipNuevo[4];
     double monto;
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    char retorno[30];
+    char retorno1[6];
     while(1){
         printf("Opciones Disponibles:\n1)Cambiar Nip\n2)Consulta de saldo\n3)Deposito a cuenta\n4)Disposicion de efectivo\n5)Mostrar informacion del cliente\n6)Salir\nOpcion: ");
         scanf("%d",&opcion);
@@ -163,7 +139,7 @@ int main(){
                         }
                     }
                     if(i == 4){
-                        cambiarNip(&cuentas[posicion],nipNuevo);
+                        Cuenta_cambiarNip(&cuentas[posicion],nipNuevo);
                         break;
                     }
                 }
@@ -184,11 +160,7 @@ int main(){
                 }
                 Cuenta_mostrar(&cuentas[posicion]);
                 printf("-------------------------------------------\n");
-                time_t t = time(NULL);
-                struct tm tm = *localtime(&t);
-                char* retorno[30];
                 sprintf(retorno,"%d/%d/%d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
-                char retorno1[5];
                 sprintf(retorno1,"%d:%d",tm.tm_hour, tm.tm_min);
                 agregarMovimiento(Movimiento_crear(movimientoActual+1,"consulta",retorno,retorno1,monto,&cuentas[posicion]));
                 break;
@@ -215,7 +187,10 @@ int main(){
                         break;
                     }
                 }
-                depositar(&cuentas[posicion],monto);
+                Cuenta_depositar(&cuentas[posicion],monto);
+                sprintf(retorno,"%d/%d/%d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
+                sprintf(retorno1,"%d:%d",tm.tm_hour, tm.tm_min);
+                agregarMovimiento(Movimiento_crear(movimientoActual+1,"deposito",retorno,retorno1,monto,&cuentas[posicion]));
                 break;
             case 4:
                 listarCuentas();
@@ -240,7 +215,11 @@ int main(){
                         break;
                     }
                 }
-                retirar(&cuentas[posicion],monto);
+                Cuenta_retirar(&cuentas[posicion],monto);
+                sprintf(retorno,"%d/%d/%d",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);
+                char retorno1[5];
+                sprintf(retorno1,"%d:%d",tm.tm_hour, tm.tm_min);
+                agregarMovimiento(Movimiento_crear(movimientoActual+1,"retiro",retorno,retorno1,monto,&cuentas[posicion]));
                 break;
             case 5:
                 listarClientes();

@@ -19,4 +19,7 @@ typedef struct{
 
 void Cuenta_mostrar(Cuenta* cuenta);
 Cuenta Cuenta_crear(long numCuenta, char tipo[TAM], int nip[4], double saldo, Cliente *titular);
+void Cuenta_retirar(Cuenta *c, double monto);
+void Cuenta_depositar(Cuenta *c, double monto);
+void Cuenta_cambiarNip(Cuenta *c, char nip[4]);
 #endif // _CUENTA_H

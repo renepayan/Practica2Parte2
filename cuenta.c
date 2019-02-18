@@ -5,7 +5,20 @@
  **************/
 
 #include "cuenta.h"
-
+void Cuenta_retirar(Cuenta *c, double monto){
+    c->saldo-=monto;
+    printf("El retiro de %lf ha sido efectuado con exito en la cuenta: %ld, saldo actual: %lf\n",monto,c->numCuenta,c->saldo);
+}
+void Cuenta_depositar(Cuenta *c, double monto){
+    c->saldo+=monto;
+    printf("El deposito de %lf ha sido efectuado con exito en la cuenta: %ld, saldo actual: %lf\n",monto,c->numCuenta,c->saldo);
+}
+void Cuenta_cambiarNip(Cuenta *c, char nip[4]){
+    for(int i = 0;i<4;i++){
+        c->nip[i] = (int)(nip[i] - '0');
+    }
+    printf("Nip cambiado Exitosamente\n");
+}
 void Cuenta_mostrar(Cuenta* cuenta){
     printf("-------------------------------------------\n");
     printf("Numero de cuenta: %ld\n",cuenta->numCuenta);
